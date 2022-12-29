@@ -8,3 +8,4 @@ edition = "2021"
 [dependencies]
 notify-rust = "4"
 lock = "0.1"
+clap = { version = "4.0.32", features = ["derive"] }
