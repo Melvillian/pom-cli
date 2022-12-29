@@ -1,29 +1,29 @@
 extern crate lock;
 
-use lock::{FailureReason, lock};
-use notify_rust::{Notification};
-use std::{thread, time};
 use clap::Parser;
+use lock::{lock, FailureReason};
+use notify_rust::Notification;
+use std::{thread, time};
 
 const MINUTE: u64 = 1000 * 60;
 /// A simple program to lock your screen and leave a desktop notification message <body> after some number of <minutes>
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
 struct Args {
-   /// Message body to appear in desktop notification
-   #[arg()]
-   body: String,
+    /// Message body to appear in desktop notification
+    #[arg()]
+    body: String,
 
-   /// Number of minutes to wait before locking
-   #[arg()]
-   minutes: u64,
+    /// Number of minutes to wait before locking
+    #[arg()]
+    minutes: u64,
 }
 // A small CLI tool for programmatically locking my laptop and alerting me with
 // a message. I intend to use this for implementing the Pomodoro method, but on
 // my own terms.
 fn main() {
     let args = Args::parse();
-    
+
     let message = args.body;
     let minutes = args.minutes;
 
@@ -49,7 +49,7 @@ fn lock_screen() {
     match result {
         Err(FailureReason::CannotExecute) => {
             panic!("Lock command execution failure")
-        },
+        }
         Err(FailureReason::LinuxCommandNotFound) => {
             // There is no xdg-screensaver, gnome-screensaver or dm-tool for linux,
             // do something else.
@@ -61,7 +61,8 @@ fn lock_screen() {
 
 fn notify(summary: &str) {
     Notification::new()
-    .summary(summary)
-    .timeout(0) // this however is
-    .show().unwrap();
+        .summary(summary)
+        .timeout(0) // this however is
+        .show()
+        .unwrap();
 }
