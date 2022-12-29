@@ -91,5 +91,5 @@ fn notify(summary: &str) {
     Notification::new()
     .summary(summary)
     .timeout(0) // this however is
-    .show();
+    .show().unwrap();
 }
