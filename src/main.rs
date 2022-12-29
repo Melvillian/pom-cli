@@ -22,29 +22,35 @@ struct Args {
 // a message. I intend to use this for implementing the Pomodoro method, but on
 // my own terms.
 fn main() {
-    let args: Vec<String> = env::args().skip(1).collect();
-    if args.len() != 2 {
-        panic!("must provide BODY and MINUTES arguments")
-    }
+    // let args: Vec<String> = env::args().skip(1).collect();
+    // if args.len() != 2 {
+    //     panic!("must provide BODY and MINUTES arguments")
+    // }
 
-    let message = args.index(0);
-    let minutes = args.index(1).parse::<u64>().unwrap();
-
-    // wait MINUTES before locking
-    let wait_time = time::Duration::from_millis(minutes * MINUTE);
-    thread::sleep(wait_time);
-
-    lock_screen();
-
-    // @dev when testing on my M1 mac my notification would immediately
-    // disappear if it happened at the same time as lock_screen(); so
-    // here we wait an arbitrary & short amount of time (500 ms), which
-    // solves the problem for me :)
-    let small_delay = time::Duration::from_millis(500);
-    thread::sleep(small_delay);
+    let args = Args::parse();
+    
+    let message = args.body.as_deref();
+    let minutes = args.minutes.as_ref();
 
 
-    notify(message)
+    // // let message = args.index(0);
+    // // let minutes = args.index(1).parse::<u64>().unwrap();
+
+    // // wait MINUTES before locking
+    // let wait_time = time::Duration::from_millis(minutes * MINUTE);
+    // thread::sleep(wait_time);
+
+    // lock_screen();
+
+    // // @dev when testing on my M1 mac my notification would immediately
+    // // disappear if it happened at the same time as lock_screen(); so
+    // // here we wait an arbitrary & short amount of time (500 ms), which
+    // // solves the problem for me :)
+    // let small_delay = time::Duration::from_millis(500);
+    // thread::sleep(small_delay);
+
+
+    // notify(message)
 
     // let args = Args::parse();
     
