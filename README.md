@@ -1,6 +1,6 @@
 # pom-cli
 
-A simple program to lock your screen and leave a desktop notification <message> after some number of <minutes>
+A simple program to lock your screen and leave a desktop notification `message` after some number of `minutes`
 
 ## Setup
 
@@ -13,6 +13,8 @@ A simple program to lock your screen and leave a desktop notification <message> 
 For example:
 
 `cargo run "go to standup meeting" 30 &`
+
+Then, 30 minutes from now, your screen will lock and the text "go to standup meeting" will be written to your terminal.
 
 
 > Note: The `&` above will allow the `pom-cli` process to run in the background on all Unix-like systems (mac & Linux). If you are working on Windows, I would appreciate a PR telling me how to run Windows processes in the background!
